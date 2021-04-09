@@ -50,17 +50,10 @@ class ReactCalculator extends Component {
             key={r + "-" + i} />
         );
 
-
-
       }
-
 
       views.push(<View style={Style.inputRow} key={"row-" + r}>{inputRow}</View>)
     }
-
-
-
-
 
     return views;
   }
@@ -74,8 +67,6 @@ class ReactCalculator extends Component {
       selectedSymbol: null
     }
   }
-
-
 
   _onInputButtonPressed(input) {
     switch (typeof input) {
@@ -96,6 +87,13 @@ class ReactCalculator extends Component {
           selectedSymbol: str,
           previousInputValue: this.state.inputValue,
           inputValue: ""
+        });
+        break;
+      case '.':
+        this.setState({
+          selectedSymbol: str,
+          previousInputValue: this.state.inputValue,
+          inputValue: this.state.inputValue+"."
         });
         break;
       case '=':
