@@ -17,6 +17,7 @@
     </TextView>
 
 
+
     <LinearLayout
         android:id="@+id/calculator_input_container"
         style="@style/CalculatorInputContainer"
@@ -24,7 +25,7 @@
         android:layout_height="99dp"
         android:layout_weight="8"
         android:orientation="vertical"
-        android:weightSum="4">
+        android:weightSum="5">
 
         <LinearLayout
             android:id="@+id/calculator_input_container_line1"
@@ -52,6 +53,14 @@
 
         <LinearLayout
             android:id="@+id/calculator_input_container_line4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="4" />
+
+        <LinearLayout
+            android:id="@+id/calculator_input_container_line5"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"

@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -12,6 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private val INPUT_BUTTONS = listOf(
+                listOf("CE", "", "", "C"),
             listOf("1", "2", "3", "/"),
             listOf("4", "5", "6", "*"),
             listOf("7", "8", "9", "-"),
@@ -27,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         addCells(findViewById(R.id.calculator_input_container_line2), 1)
         addCells(findViewById(R.id.calculator_input_container_line3), 2)
         addCells(findViewById(R.id.calculator_input_container_line4), 3)
+        addCells(findViewById(R.id.calculator_input_container_line5), 4)
+
     }
 
     private fun addCells(linearLayout: LinearLayout, position: Int) {
@@ -51,26 +55,44 @@ class MainActivity : AppCompatActivity() {
     private var input: Float? = null
     private var previousInput: Float? = null
     // private var intermediate: Float? = null
+    private var memory: Boolean? = false
     private var symbol: String? = null
 
     private fun onCellClicked(value: String) {
         when {
 
                 value.isNum() -> {
-                    input = value.toFloat()&
+                    input = value.toFloat()
                     updateDisplayContainer(value)
                 }
 
             // value == "." ->  onDoteClicked()
             value == "=" -> onEqualsClicked()
-            listOf("/", "*", "-", "+").contains(value) -> onSymbolClicked(value)
+            value == "CE" -> onCeClicked()
+            value == "C" -> onCClicked()
+            listOf("/", "*", "-", "+",".").contains(value) -> onSymbolClicked(value)
         }
     }
 
+    private fun onCeClicked(){
+        input=null
+        previousInput=null
+        symbol=null
+        updateDisplayContainer("")
+    }
+
+    private fun onCClicked(){
+        input=previousInput
+        updateDisplayContainer("")
+    }
+
     private fun onEqualsClicked() {
+        Log.d("CELL", previousInput.toString() )
         if (input == null || previousInput == null || symbol == null) {
+            Log.d("CELL", "0.1" )
             return
         }
+        Log.d("CELL", "1" )
 
         updateDisplayContainer(when (symbol) {
             "+" -> input!! + previousInput!!
@@ -80,12 +102,27 @@ class MainActivity : AppCompatActivity() {
                 0.0.toFloat() -> "ERROR"
                 else -> previousInput!! / input!!
             }
+            //"." ->
 
             else -> "ERROR"
         })
+        Log.d("CELL", "2" )
 
+         when (symbol) {
+            "+" -> previousInput=input!! + previousInput!!
+            "-" ->  previousInput=previousInput!! - input!!
+            "*" -> previousInput=input!! * previousInput!!
+            "/" -> when(input){
+                0.0.toFloat() -> "ERROR"
+                else -> previousInput=previousInput!! / input!!
+            }
+            //"." ->
+
+            else -> "ERROR"
+        }
+        memory=true
+        Log.d("CELL", previousInput.toString() )
         input = null
-        previousInput = null
         symbol = null
     }
 
@@ -129,9 +166,16 @@ class MainActivity : AppCompatActivity() {
     // }
 
     private fun onSymbolClicked(symbol: String) {
-        this.symbol = symbol
-        previousInput = input
-        input = null
+        if (memory==true){
+            this.symbol = symbol
+            input = null
+        }
+        else{
+            this.symbol = symbol
+            previousInput = input
+            input = null
+        }
+
     }
 
     private fun updateDisplayContainer(value: Any) {
