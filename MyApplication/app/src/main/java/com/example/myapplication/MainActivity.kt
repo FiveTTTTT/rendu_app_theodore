@@ -166,7 +166,7 @@ class MainActivity : AppCompatActivity() {
     // }
 
     private fun onSymbolClicked(symbol: String) {
-        if (memory==true){
+        /*if (memory==true){
             this.symbol = symbol
             input = null
         }
@@ -174,7 +174,10 @@ class MainActivity : AppCompatActivity() {
             this.symbol = symbol
             previousInput = input
             input = null
-        }
+        }*/
+        this.symbol = symbol
+        previousInput = input
+        input = null
 
     }
 
