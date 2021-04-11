@@ -49,7 +49,7 @@ class _CalculatorState extends State<Calculator> {
                 color: AppColors.displayContainerBackground,
                 alignment: AlignmentDirectional.centerEnd,
                 padding: const EdgeInsets.all(22.0),
-                child: Text(input?.toString() ?? "0"),
+                child: Text(input?.toString() ?? ""),
               ),
             ),
             Flexible(
@@ -82,7 +82,7 @@ class _CalculatorState extends State<Calculator> {
   }
 
   void onItemClicked(String value) {
-    print('On Click $value');
+    // print('On Click $value');
 
     switch (value) {
       case '0':
@@ -112,7 +112,10 @@ class _CalculatorState extends State<Calculator> {
   }
 
   void onNewDigit(String digit) {
-    // TODO
+    
+    print('On Click $digit');
+    // Text(digit);
+    // print('On Click2 $digit');
   }
 
   void onNewSymbol(String digit) {
@@ -120,7 +123,22 @@ class _CalculatorState extends State<Calculator> {
   }
 
   void onEquals() {
-    // TODO
+    // switch (symbol) {
+    //   case '+':
+    //   input =input +previousInput 
+        
+    //     break;
+    //   case '-':
+        
+    //     break;
+    //   case '*':
+        
+    //     break;
+    //   case '/':
+        
+    //     break;
+    //   default:
+    // }
   }
 }
 
