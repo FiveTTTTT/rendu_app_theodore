@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     private var input: Float? = null
     private var previousInput: Float? = null
     // private var intermediate: Float? = null
-    private var memory: Boolean? = false
+    // private var memory: Boolean? = false
     private var symbol: String? = null
 
     private fun onCellClicked(value: String) {
@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
 
             else -> "ERROR"
         }
-        memory=true
+        // memory=true
         Log.d("CELL", previousInput.toString() )
         input = null
         symbol = null
