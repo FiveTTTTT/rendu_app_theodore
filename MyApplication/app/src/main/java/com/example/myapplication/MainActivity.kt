@@ -1,7 +1,6 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -51,22 +50,20 @@ class MainActivity : AppCompatActivity() {
 
     private var input: Float? = null
     private var previousInput: Float? = null
-    private var intermediate: Float? = null
+    // private var intermediate: Float? = null
     private var symbol: String? = null
 
     private fun onCellClicked(value: String) {
         when {
-            value.isNum() -> {
-                when(intermediate){
-                    null -> input = value.toFloat()
-                    else -> input = intermediate
 
+                value.isNum() -> {
+                    input = value.toFloat()&
+                    updateDisplayContainer(value)
                 }
-                updateDisplayContainer(value)
-            }
-            value == "." ->  onDoteClicked()
+
+            // value == "." ->  onDoteClicked()
             value == "=" -> onEqualsClicked()
-            listOf("/", "*", "-", "+",".").contains(value) -> onSymbolClicked(value)
+            listOf("/", "*", "-", "+").contains(value) -> onSymbolClicked(value)
         }
     }
 
@@ -92,36 +89,44 @@ class MainActivity : AppCompatActivity() {
         symbol = null
     }
 
-    private fun onDoteClicked() {
-        Log.d("CELL", "1" )
-//        previousInput = input
-        onSymbolClicked(".")
-        Log.d("CELL", "2" )
-        /*if (input == null ) {
-            updateDisplayContainer("previous")
-            return
-        }*/
-        Log.d("CELL", "3" )
-        if (previousInput==null){
-            Log.d("CELL", "4" )
-            updateDisplayContainer("previousInput!!")
-            return
-        }
-        Log.d("CELL", "5" )
+    // private fun floatNum(float: Float){
+    //     intermediate=previousInput!!+float/10
+    //     input=intermediate
+    //     //return this.float
+    // }
 
-        updateDisplayContainer("input!!")
-        Log.d("CELL", "6" )
-        when(input){
-            null -> intermediate=previousInput
-        }
-        intermediate=previousInput!!+input!!/10
-        Log.d("CELL", "7" )
-        /*updateDisplayContainer(intermediate!!)*/
+    // private fun onDoteClicked() {
+    //     // Log.d("CELL", "1" )
+    //     previousInput = input
+    //     // onSymbolClicked(".")
+    //     // Log.d("CELL", "2" )
+    //     if (input == null ) {
+    //         updateDisplayContainer("previous")
+    //         return
+    //     }
+    //     // Log.d("CELL", "3" )
+    //     /*f (previousInput==null){
+    //         Log.d("CELL", "4" )
+    //         updateDisplayContainer("previousInput!!")
+    //         return
+    //     }*/
+    //     intermediate=previousInput
+    //     updateDisplayContainer(intermediate!!)
+    //     // Log.d("CELL", "5" )
 
-        previousInput=intermediate
-        Log.d("CELL", "8" )
+    //     // updateDisplayContainer("input!!")
+    //     // Log.d("CELL", "6" )
+    //     when(input){
+    //         null -> intermediate=previousInput
+    //     }
+    //     intermediate=previousInput!!+input!!/10
+    //     // Log.d("CELL", "7" )
+    //     /*updateDisplayContainer(intermediate!!)*/
 
-    }
+    //     previousInput=intermediate
+    //     // Log.d("CELL", "8" )
+
+    // }
 
     private fun onSymbolClicked(symbol: String) {
         this.symbol = symbol
@@ -131,7 +136,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateDisplayContainer(value: Any) {
         findViewById<TextView>(R.id.calculator_display_container).text = value.toString()
-
     }
 
 
